@@ -2,7 +2,6 @@
 ## 運行流程
 
 ### PART 1. Document retrieval 
-
  將主辦方所提供的訓練集我們檔名稱作 "public_train_all.jsonl" 輸入
 HanLP 模型將 Claim 切成多個詞語，接著再交給 SimCSE 模型將所有切出的詞
 語和原句子去做 "CosineSimilarity" 計算相似度分數，然後進行排序由高到
@@ -11,18 +10,8 @@ HanLP 模型將 Claim 切成多個詞語，接著再交給 SimCSE 模型將所�
 緊接著也會將測試資料集和上述做一樣的事情，將提供的測試集名稱為 
 "public_private_combine_test_data.jsonl" 檔案丟入模型得到 
 "combine_test_doc10_all.jsonl檔案，part1到此結束。
-### PART 2. Sentence retrieval 
 
-Hyper-parameters: 
-● Optimizer: AdamW
-● SEED = 40 
-● NUM_EPOCHS = 10
-● LR = 2e-5
-● TRAIN_BATCH_SIZE = 16 * 8 (accumulation step) = 128 
-● TEST_BATCH_SIZE = 64 
-● NEGATIVE_RATIO = 0.085 
-● VALIDATION_STEP = 300 
-● TOP_N = 5 
+### PART 2. Sentence retrieval 
 首先會先將 "train_doc10_all_method.jsonl" 檔案 split 成 Train 和 
 Validation 資料比例分別是8:2，接著會把 Train 資料集的每個 predicted_
 pages 丟入 wiki 生成的 mapping 函式去和 ground truth 比較，如果相等就
@@ -34,18 +23,8 @@ data 的 top5 evidences，再來將這些資料的 evidences 通過我們設計�
 evidence reranking 學習機制，得到"train_doc10sent5_all_rerank_ext.jso
 nl"、"dev_doc10sent5_all_rerank_ext.jsonl "、"combine_test_doc10sent5
 _rerank_ext.jsonl" 三個檔案，part2結束。
-### PART 3. Claim verification
 
-Hyper-parameters: 
-● Optimizer: AdamW
-● TRAIN_BATCH_SIZE = 4 * 8 (accumulation step) = 32
-● TEST_BATCH_SIZE = 16 
-● SEED = 42 
-● LR = 7e-5 
-● NUM_EPOCHS = 5 
-● MAX_SEQ_LEN = 256
-● EVIDENCE_TOPK = 5 
-● VALIDATION_STEP = 500
+### PART 3. Claim verification
 我們使用prompt-based learning，並讓模型訓練mask predict，並計算[Mask] 
 的 crossentropy loss，將 "train_doc10sent5_all_rerank_ext.jsonl "、 
 "dev_doc10sent5_all_rerank_ext.jsonl" 檔案丟入chinese-bert-wwm-ext做
