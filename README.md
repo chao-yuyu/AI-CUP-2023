@@ -1,4 +1,6 @@
 # NCKU-AICUP2023-TEAM-3575
+## 主旨
+
 ## 運行流程
 
 ### PART 1. Document retrieval 
@@ -9,7 +11,7 @@ HanLP 模型將 Claim 切成多個詞語，接著再交給 SimCSE 模型將所�
 "train_doc10_all_method.jsonl" 這個檔案。
 緊接著也會將測試資料集和上述做一樣的事情，將提供的測試集名稱為 
 "public_private_combine_test_data.jsonl" 檔案丟入模型得到 
-"combine_test_doc10_all.jsonl檔案，part1到此結束。
+"combine_test_doc10_all.jsonl檔案，part1到此結束，會得到train和test每筆句子的的top10 Predicted pages。
 
 ### PART 2. Sentence retrieval 
 首先會先將 "train_doc10_all_method.jsonl" 檔案 split 成 Train 和 
@@ -22,7 +24,7 @@ top_N evidences，接著通過訓練出的模型預測 Train、Validation、Test
 data 的 top5 evidences，再來將這些資料的 evidences 通過我們設計的 
 evidence reranking 學習機制，得到"train_doc10sent5_all_rerank_ext.jso
 nl"、"dev_doc10sent5_all_rerank_ext.jsonl "、"combine_test_doc10sent5
-_rerank_ext.jsonl" 三個檔案，part2結束。
+_rerank_ext.jsonl" 三個檔案，part2結束，會得到rerank後每筆句子的top5 evidences 。
 
 ### PART 3. Claim verification
 我們使用prompt-based learning，並讓模型訓練mask predict，並計算[Mask] 
@@ -32,7 +34,7 @@ _rerank_ext.jsonl" 三個檔案，part2結束。
 前三個證據丟入模型訓練，這是因為part2做了rerank後取越前面分數高的證據
 能讓模型更有效率的進行訓練，訓練結束取val-acc最好的checkpoint檔，用此
 模型去對測試集"combine_test_doc10sent5_rerank_ext.jsonl" 檔案進行mask 
-predict，得到最後的submission.jsonl檔案，程式結束。
+predict，得到最後的submission.jsonl檔案，獲得最終每筆資料的三分類結果，程式結束。
 
 ## 運行環境
 ### 使用 Anaconda 建立環境
