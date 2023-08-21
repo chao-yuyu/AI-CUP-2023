@@ -1,5 +1,7 @@
 # NCKU-AICUP2023-TEAM-3575
 ## 主旨
+AI CUP 2023 教育部全國大專校院人工智慧競賽 真相只有一個: 事實文字檢索與查核競賽
+內容主要是在做NLP繁體中文的假訊息偵測，要辨別一句話是真的(Supports)、 假的(Refutes)、資訊不足(Not Enough Information )， 通過對主辦方所提供的訓練集和測試集資料做Feature的篩選，先對本身句子和Wiki文章算 Cosine Similarity(IDEA-CCNL/Erlangshen-SimCSE-110M-Chinese ) ， 取 相 關 度 高 的 Top10 Predicted Page ， 在 通 過 Predicted Page中的各句子，去用BERT(hfl/chinese-bert-wwm-ext )模型尋找出真正對要預測的句子有用的Top 5 Evidence 句子，最後用這些句子透過BERT去做分類問題，判斷該句話是三分類的哪一類結果。
 
 ## 運行流程
 
