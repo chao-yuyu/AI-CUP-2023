@@ -1,7 +1,7 @@
 # NCKU-AICUP2023-TEAM-3575
 ## 運行流程
 
-##PART 1. Document retrieval 
+### PART 1. Document retrieval 
 
  將主辦方所提供的訓練集我們檔名稱作 "public_train_all.jsonl" 輸入
 HanLP 模型將 Claim 切成多個詞語，接著再交給 SimCSE 模型將所有切出的詞
@@ -11,7 +11,7 @@ HanLP 模型將 Claim 切成多個詞語，接著再交給 SimCSE 模型將所�
 緊接著也會將測試資料集和上述做一樣的事情，將提供的測試集名稱為 
 "public_private_combine_test_data.jsonl" 檔案丟入模型得到 
 "combine_test_doc10_all.jsonl檔案，part1到此結束。
-##PART 2. Sentence retrieval 
+### PART 2. Sentence retrieval 
 
 Hyper-parameters: 
 ● Optimizer: AdamW
@@ -34,7 +34,7 @@ data 的 top5 evidences，再來將這些資料的 evidences 通過我們設計�
 evidence reranking 學習機制，得到"train_doc10sent5_all_rerank_ext.jso
 nl"、"dev_doc10sent5_all_rerank_ext.jsonl "、"combine_test_doc10sent5
 _rerank_ext.jsonl" 三個檔案，part2結束。
-##PART 3. Claim verification
+### PART 3. Claim verification
 
 Hyper-parameters: 
 ● Optimizer: AdamW
