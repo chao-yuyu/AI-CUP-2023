@@ -9,8 +9,7 @@ AI CUP 2023 教育部全國大專校院人工智慧競賽 真相只有一個: �
 ### PART 1. Document retrieval 
  將主辦方所提供的訓練集我們檔名稱作 "public_train_all.jsonl" 輸入
 HanLP 模型將 Claim 切成多個詞語，接著再交給 SimCSE 模型將所有切出的詞
-語和原句子去做 "CosineSimilarity" 計算相似度分數，然後進行排序由高到
-低，再把詞語前十高的當作該句子之預選 predicted pages，最後得到 
+語和原句子去做 "CosineSimilarity" 計算相似度分數，然後進行排序由高到低，再把詞語前十高的當作該句子之預選 predicted pages，最後得到 
 "train_doc10_all_method.jsonl" 這個檔案。
 緊接著也會將測試資料集和上述做一樣的事情，將提供的測試集名稱為 
 "public_private_combine_test_data.jsonl" 檔案丟入模型得到 
