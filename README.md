@@ -24,8 +24,7 @@ random 選取資料當作負相關資料，將資料丟進 chinese-bert-wwm-ext 
 練，取 F1-score 最好的 checkpoint 檔，此訓練模型的功用為預測資料集取
 top_N evidences，接著通過訓練出的模型預測 Train、Validation、Test 
 data 的 top5 evidences，再來將這些資料的 evidences 通過我們設計的 
-evidence reranking 學習機制，得到"train_doc10sent5_all_rerank_ext.jso
-nl"、"dev_doc10sent5_all_rerank_ext.jsonl "、"combine_test_doc10sent5
+evidence reranking 學習機制，得到"train_doc10sent5_all_rerank_ext.jsonl"、"dev_doc10sent5_all_rerank_ext.jsonl "、"combine_test_doc10sent5
 _rerank_ext.jsonl" 三個檔案，part2結束，會得到rerank後每筆句子的top5 evidences 。
 
 ### PART 3. Claim verification
